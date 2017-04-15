@@ -1,6 +1,5 @@
 # coding=utf-8
 import math
-import os
 
 class Point :
     x = 0
@@ -19,7 +18,28 @@ class Point :
 
     def __sub__(self, q):
         try:
-            py = Point(self.x - q.x, self.y - q.x)
+            py = Point(self.x - q.x, self.y - q.y)
             return py
         except TypeError:
             print 'Point Type Error'
+
+    def establishPolarCoordinatePoint(self, radius, angle, angleMode):
+        try:
+            angleValue = 0
+            if (angleMode == 'a'):
+                angleValue = angle
+            elif (angleMode == 'r'):
+                angleValue = angle * 180
+            else:
+                print 'Angle mode was error.'
+
+            if (radius == 0):
+                print 'Radius should not equal to 0.'
+            else:
+                x = radius * math.cos(angleValue)
+                y = radius * math.sin(angleValue)
+                tmpPoint = Point(x, y)
+                rePoint = self + tmpPoint
+                return rePoint
+        except ValueError:
+            print 'Arguments injected error.'

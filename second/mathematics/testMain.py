@@ -6,28 +6,66 @@ from modules import line as ll
 from modules import circle as ce
 
 def returnPoint():
-    p = pl.Point(float(raw_input('x:')), float(raw_input('y:')))
-    print 'Success for created a point.'
-    return p
+    inputX, inputY = (raw_input('X:'), raw_input('Y:'))
+    flagx, flagy = (inputJudge(inputX), inputJudge(inputY))
+    if (flagx and flagy):
+        p = pl.Point(float(inputX), float(inputY))
+        print 'Success for created a PLC point.'
+        return p
+    else:
+        print 'Create point failed, Please input correct value for location.'
+        returnPoint()
 
-def returnLine(p1, p2):
+def returnPCPoint(ra, an, anM):
+    try:
+        p = returnPoint()
+        print 'Success for created a PLC point.'
+        tmpP = p.establishPolarCoordinatePoint(ra, an, anM)
+        return tmpP
+    except TypeError:
+        print 'Create point failed, Please input correct value for PC.'
+
+def returnPRCLine(p1, p2):
     l = ll.Line(p1, p2)
     print 'Success for created a line.'
     return l
+
+def returnPCLine(p1, length, angle, angleM):
+    try:
+        l = ll.Line.establishPolarCoordinatorLine(p1, length, angle, angleM)
+        print 'Success for created a PC line.'
+        return l
+    except ValueError:
+        print 'Please input correct value for line.'
 
 def returnCircle(center, radius):
     c = ce.Circle(center, radius)
     print 'Success for created a circle.'
     return c
 
-print 'create a line:'
-pa = returnPoint()
-pb = returnPoint()
-l1 = returnLine(pa, pb)
-print 'l1 lenth = %f' % l1.length()
-print 'create a circle:'
-center = returnPoint()
-ra = int(raw_input('Please input radius for circle:'))
-c1 = returnCircle(center, ra)
-stal = c1.lineStatuesCircle(l1)
-print stal
+def inputJudge(value):
+    if (value != '' and value != '\n' and value != '\0'):
+        return True
+    else:
+        return False
+
+# print 'create a line:'
+# pa = returnPoint()
+# pb = returnPoint()
+# l1 = returnLine(pa, pb)
+# print 'l1 lenth = %f' % l1.length
+# print 'create a circle:'
+# center = returnPoint()
+# ra = float(raw_input('Please input radius for circle:'))
+# c1 = returnCircle(center, ra)
+# hc = c1.returnHeightOnC(l1)
+# print 'hc = %f' % hc
+# c2 = returnCircle(center, hc)
+# stal = c2.lineStatuesCircle(l1)
+# print stX.lineStatuesDic[stal]
+
+print 'create a PC line'
+stP = returnPoint()
+lp1 = returnPCLine(stP,float(raw_input('Length:')), float(raw_input('Angle:')) ,raw_input('a or r:'))
+
+print lp1.angle, lp1.length, lp1.endPoint.x, lp1.endPoint.y
