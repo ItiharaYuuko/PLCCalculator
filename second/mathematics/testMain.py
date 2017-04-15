@@ -30,9 +30,9 @@ def returnPRCLine(p1, p2):
     print 'Success for created a line.'
     return l
 
-def returnPCLine(p1, length, angle, angleM):
+def returnPCLine(p1, length, angleMode, angle):
     try:
-        l = ll.Line.establishPolarCoordinatorLine(p1, length, angle, angleM)
+        l = ll.Line.establishPolarCoordinateLine(p1, length, angleMode, angle)
         print 'Success for created a PC line.'
         return l
     except ValueError:
@@ -49,23 +49,29 @@ def inputJudge(value):
     else:
         return False
 
-# print 'create a line:'
-# pa = returnPoint()
-# pb = returnPoint()
-# l1 = returnLine(pa, pb)
+print 'create a line:'
+pa = returnPoint()
+pb = returnPoint()
+l1 = returnPRCLine(pa, pb)
+# print l1.angle
 # print 'l1 lenth = %f' % l1.length
-# print 'create a circle:'
-# center = returnPoint()
-# ra = float(raw_input('Please input radius for circle:'))
-# c1 = returnCircle(center, ra)
-# hc = c1.returnHeightOnC(l1)
-# print 'hc = %f' % hc
-# c2 = returnCircle(center, hc)
-# stal = c2.lineStatuesCircle(l1)
-# print stX.lineStatuesDic[stal]
+print 'create a circle:'
+center = returnPoint()
+ra = float(raw_input('Please input radius for circle:'))
+c1 = returnCircle(center, ra)
+hc = c1.returnHeightOnC(l1)
+print 'hc = %f' % hc
+c2 = returnCircle(center, hc)
+stal = c2.lineStatuesCircle(l1)
+print stX.lineStatuesDic[stal]
 
-print 'create a PC line'
-stP = returnPoint()
-lp1 = returnPCLine(stP,float(raw_input('Length:')), float(raw_input('Angle:')) ,raw_input('a or r:'))
 
-print lp1.angle, lp1.length, lp1.endPoint.x, lp1.endPoint.y
+# print 'Create a PCPoint:'
+# prcp = returnPoint()
+# pcp = prcp.establishPolarCoordinatePoint(float(raw_input('Radius for PCP:')), raw_input('Angle mode input \'a\' or \'r\''), float(raw_input('Angle for round:')))
+# print prcp.x, prcp.y, pcp.x, pcp.y
+#
+# print 'Create a PCLine:'
+# lx = returnPCLine(prcp, float(raw_input('Radius for PCL:')), raw_input('Angle mode input \'a\' or \'r\''), float(raw_input('Angle for round:')))
+# print lx.length, lx.angle, lx.endPoint.x, lx.endPoint.y
+

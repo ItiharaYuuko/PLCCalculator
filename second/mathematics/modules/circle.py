@@ -17,9 +17,10 @@ class Circle:
     def __init__(self, centerPoint, radius):
         try:
             self.center = centerPoint
-            self.radius = radius
-            if (radius):
+            if (radius == 0):
                 raise ValueError('Circles radius should not equal to 0')
+            else:
+                self.radius = radius
         except TypeError:
             print 'Point type error or radius type error.'
 
@@ -82,18 +83,13 @@ class Circle:
                 if ((lcStaPointA == psta.onCircle) or (lcStaPointB == psta.onCircle)):
                     return lsta.cutCircle
                 elif ((lcStaPointA == psta.outCircle) and (lcStaPointB == psta.outCircle)):
-                    onCircleCount = 0
-                    includePointRangeX = range(int(pointB.x - pointA.x))
-                    includePointRangeY = range(int(pointB.y - pointA.y))
-                    # for (x, y) in (includePointRangeX, includePointRangeY):
-                    #     print (x, y)
-                    #     tmpPoint = Point(x,y)
-                    #     if (self.pointStatuesOnCircle(tmpPoint) == psta.onCircle):
-                    #         onCircleCount += 1
-                    #     else:
-                    #         continue
-                    print includePointRangeX
-                    if (onCircleCount == 1):
+                    tmpLineA = Line(self.center, pointA)
+                    tmpLineB = Line(self.center, pointB)
+                    traAAngle = abs(lineC.angle - tmpLineA.angle)
+                    traBAngle = abs(lineC.angle - tmpLineB.angle)
+
+                    print traAAngle, traBAngle
+                    if (1):
                         return lsta.cutCircle
                     else:
                         return lsta.statueError
