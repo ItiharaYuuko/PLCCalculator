@@ -36,7 +36,7 @@ class Point:
                 angleValue = math.degrees(angle)
             else:
                 print 'Angle mode was error.'
-            angleR = math.radians(angleValue)
+            angleR = math.radians(angleValue) #Angle to radians.
             if (radius == 0):
                 print 'Radius should not equal to 0.'
             else:

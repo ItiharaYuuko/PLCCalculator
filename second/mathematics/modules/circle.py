@@ -63,7 +63,9 @@ class Circle:
             lcStaPointB = self.pointStatuesOnCircle(lineC.endPoint)
             pointA = lineC.startPoint
             pointB = lineC.endPoint
-            if (hC < self.radius):
+            roHc = round(hC,3) #Get the floating number for 3 small numbers.
+            roRad = round(self.radius)
+            if (roHc < roRad):
                 if ((lcStaPointA == psta.inCircle) and (lcStaPointB == psta.inCircle)):
                     return lsta.inCircle
                 elif ((lcStaPointA == psta.inCircle) and (lcStaPointB == psta.outCircle)) or ((lcStaPointA == psta.outCircle) and (lcStaPointB == psta.inCircle)):
@@ -73,23 +75,21 @@ class Circle:
                 elif ((hC == 0) and (((pointA.x == self.center.x) and (pointA.y == self.center.y))) or ((pointB.x == self.center.x) and (pointB.y == self.center.y))):
                     return lsta.isRadius
                 elif ((lcStaPointA == psta.onCircle) and (lcStaPointB == psta.onCircle)):
-                    if (lineC.length == self.radius):
+                    if (lineC.length == roRad):
                         return lsta.isDiameter
                     else:
                         return lsta.isChord
                 else:
                     return lsta.statueError
-            elif (hC == self.radius):
+            elif (roHc == roRad):
                 if ((lcStaPointA == psta.onCircle) or (lcStaPointB == psta.onCircle)):
                     return lsta.cutCircle
                 elif ((lcStaPointA == psta.outCircle) and (lcStaPointB == psta.outCircle)):
                     tmpLineA = Line(self.center, pointA)
-                    tmpLineB = Line(self.center, pointB)
                     traAAngle = abs(lineC.angle - tmpLineA.angle)
-                    traBAngle = abs(lineC.angle - tmpLineB.angle)
-
-                    print traAAngle, traBAngle
-                    if (1):
+                    tmpAngle = 90.0 - traAAngle
+                    tmpPointInLine = self.center.establishPolarCoordinatePoint(self.radius, 'a', tmpAngle)
+                    if (lineC.inlineJudge(tmpPointInLine) == psta.onCircle):
                         return lsta.cutCircle
                     else:
                         return lsta.statueError

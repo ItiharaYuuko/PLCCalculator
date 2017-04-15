@@ -18,7 +18,6 @@ class Line:
             tmpX = float(pow(subPoint.x, 2))
             tmpY = float(pow(subPoint.y, 2))
             self.length = math.sqrt(tmpX + tmpY)
-            print self.length
             if (tmpX == 0):
                 if (tmpY > 0):
                     self.angle = 90
@@ -33,16 +32,17 @@ class Line:
                     self.angle = 0
                 else:
                     self.angle = math.degrees(math.atan(subPoint.x / subPoint.y))
+                    # Get the radians used the function as 'arctan'
         except TypeError:
             print 'Point type inject error.'
 
-    @classmethod
+    @classmethod #Signil for class method with the class.
     def establishPolarCoordinateLine(self, stP, length, angleMode, angle):
         try:
             if (angleMode == 'a'):
                 self.angle = angle
             elif (angleMode == 'r'):
-                self.angle = math.degrees(angle)
+                self.angle = math.degrees(angle) #Radians to angle.
             else:
                 print 'Angle mode was error.'
             self.startPoint = stP

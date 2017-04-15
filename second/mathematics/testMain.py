@@ -60,11 +60,9 @@ center = returnPoint()
 ra = float(raw_input('Please input radius for circle:'))
 c1 = returnCircle(center, ra)
 hc = c1.returnHeightOnC(l1)
-print 'hc = %f' % hc
-c2 = returnCircle(center, hc)
-stal = c2.lineStatuesCircle(l1)
+print 'hc = %f, radius = %f, l1angle = %f' % (hc, c1.radius, l1.angle)
+stal = c1.lineStatuesCircle(l1)
 print stX.lineStatuesDic[stal]
-
 
 # print 'Create a PCPoint:'
 # prcp = returnPoint()
